@@ -1,8 +1,4 @@
 5## ----------------------------------------------------------------------------------------------------------
-## TEMPLATE
-## Please DO NOT change the naming convention within this template. Some changes may
-## lead to your program not functioning as intended.
-
 import sys
 sys.path.append('../')
 
@@ -23,13 +19,12 @@ update_thread = repeating_timer(2, update_sim)
 
 import random
 
-## STUDENT CODE BEGINS
 ## ----------------------------------------------------------------------------------------------------------
 def randomContainer(): #Random container function, goes through container 1-6, and does 6 times until no random left
     container_ID = random.sample(range(1,7),6)
     return container_ID
 
-def dropOff(ID): #Function to be called that moves qarm to correct location
+def dropOff(ID): #Function to be called that moves qarm to correct location #written by: Carter
     if ID == 1: 
         drop_off = [-0.6002, 0.2425, 0.4202] #Location of small red
     elif ID == 2:
@@ -46,6 +41,7 @@ def dropOff(ID): #Function to be called that moves qarm to correct location
         drop_off = [0.4064, 0.0, 0.4826] #Return home if all fails
     return drop_off
 
+#written by: Carter
 def gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven): #This function controls the gripper
     if bothThresholdNine > rightArm > rightThreshold: #When right arm exceeds threshold, gripper will open, if not closes
         arm.control_gripper(40)
@@ -54,6 +50,7 @@ def gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSev
 
     return rightArm, rightThreshold
         
+#written by: Carter
 def moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location):
     if bothThresholdEight > leftArm > bothThresholdThree and bothThresholdEight > rightArm > bothThresholdThree: #If both arms between threshold 
        arm.move_arm(location[0], location[1], location[2]) #Go to correct location
@@ -65,6 +62,7 @@ def moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, both
         arm.move_arm(0.5300, 0.0, 0.0211) #Move to pickup location
     return bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight
 
+#written by: Ayesha
 def openingAutoclave(leftArm, leftThreshold, ID, bothThresholdFive, bothThresholdSix): #Function opens autoclave
     if bothThresholdSix > leftArm > leftThreshold and ID == 4:
         arm.open_red_autoclave(True) #Open autoclave if threshold is exceeded
@@ -84,6 +82,7 @@ def openingAutoclave(leftArm, leftThreshold, ID, bothThresholdFive, bothThreshol
         return None
     return leftArm, leftThreshold, ID, bothThresholdFive, bothThresholdSix
 
+#written by: Ayesha
 def terminate(leftArm, rightArm, bothThresholdFour,i): #This function counts the cages dropped. If i from the for loop is an odd number the function will return True
     if(i%2!=0):
         if leftArm > bothThresholdFour and rightArm > bothThresholdFour: #If arms below threshold
@@ -122,7 +121,7 @@ def main():
     bothThresholdEight = 0.85
     bothThresholdNine = 0.95
     
-
+    #code below written by: Ayesha
     for i in range(6): #This for loop runs the program 6 times to drop all containers
         if(i == 1):
             arm.spawn_cage(ID[i])
