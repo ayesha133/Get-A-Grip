@@ -63,20 +63,20 @@ def moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, both
     return bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight
 
 #written by: Ayesha
-def openingAutoclave(leftArm, leftThreshold, ID, bothThresholdFive, bothThresholdSix): #Function opens autoclave
-    if bothThresholdSix > leftArm > leftThreshold and ID == 4:
+def openingAutoclave(leftArm, rightArm, leftThreshold, ID, bothThresholdFive, bothThresholdSix): #Function opens autoclave
+    if bothThresholdSix > leftArm > leftThreshold and rightArm == 0 and ID == 4:
         arm.open_red_autoclave(True) #Open autoclave if threshold is exceeded
-    elif bothThresholdFive < leftArm < leftThreshold:
+    elif bothThresholdFive < leftArm < leftThreshold and rightArm == 0:
         arm.open_red_autoclave(False) #Close autoclave if threshold is not exceeded
         
-    if bothThresholdSix > leftArm > leftThreshold and ID == 5:
+    if bothThresholdSix > leftArm > leftThreshold and rightArm == 0 and ID == 5:
         arm.open_green_autoclave(True)
-    elif bothThresholdFive < leftArm < leftThreshold:
+    elif bothThresholdFive < leftArm < leftThreshold and rightArm == 0:
         arm.open_green_autoclave(False)
         
-    if bothThresholdSix > leftArm > leftThreshold and ID == 6:
+    if bothThresholdSix > leftArm > leftThreshold and ID == 6 and rightArm == 0:
         arm.open_blue_autoclave(True)
-    elif bothThresholdFive < leftArm < leftThreshold:
+    elif bothThresholdFive < leftArm < leftThreshold and rightArm == 0:
         arm.open_blue_autoclave(False)
     else:
         return None
@@ -132,7 +132,7 @@ def main():
                 rightArm = arm.emg_right()
                 gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                 moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)       
-                openingAutoclave(leftArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
+                openingAutoclave(leftArm, rightArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
                 
                 if(terminate(leftArm, rightArm, bothThresholdFour,i)==True):
                     i+=1
@@ -144,7 +144,7 @@ def main():
                         rightArm = arm.emg_right()
                         gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                         moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)       
-                        openingAutoclave(leftArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
+                        openingAutoclave(leftArm, rightArm,leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
                     
                         if(terminate(leftArm, rightArm, bothThresholdFour,i)==False):
                             i+=1
@@ -156,7 +156,7 @@ def main():
                                 rightArm = arm.emg_right()
                                 gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                                 moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)       
-                                openingAutoclave(leftArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
+                                openingAutoclave(leftArm,rightArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
                               
                                 if(terminate(leftArm, rightArm, bothThresholdFour,i)==True):
                                     i+=1
@@ -169,7 +169,7 @@ def main():
                                         rightArm = arm.emg_right()
                                         gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                                         moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)      
-                                        openingAutoclave(leftArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
+                                        openingAutoclave(leftArm, rightArm,leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
                                     
                                         if(terminate(leftArm, rightArm, bothThresholdFour,i)==False):
                                             i+=1
@@ -181,7 +181,7 @@ def main():
                                                 rightArm = arm.emg_right()
                                                 gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                                                 moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)       
-                                                openingAutoclave(leftArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
+                                                openingAutoclave(leftArm,rightArm, leftThreshold, ID[i], bothThresholdFive, bothThresholdSix)
                                     
                                                 if(terminate(leftArm, rightArm, bothThresholdFour,i)==True):
                                                     i+=1
@@ -193,7 +193,7 @@ def main():
                                                         rightArm = arm.emg_right()
                                                         gripperControl(rightArm, rightThreshold, bothThresholdNine, bothThresholdSeven)
                                                         moveArmLocation(bothThresholdOne, bothThresholdTwo, bothThresholdThree, bothThresholdFour, bothThresholdFive, bothThresholdEight, leftArm, rightArm, location)       
-                                                        openingAutoclave(leftArm, leftThreshold, ID[0], bothThresholdFive, bothThresholdSix)
+                                                        openingAutoclave(leftArm, rightArm,leftThreshold, ID[0], bothThresholdFive, bothThresholdSix)
 
                                                         if(terminate(leftArm, rightArm, bothThresholdFour,i)==True):
                                                             break
